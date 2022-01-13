@@ -22,14 +22,3 @@ export const getAPark = (id) => {
   })
 }
 
-//-------------------FOR PARKREVIEWS-------------------
-
-// import parkReviews from "../data/parkReviews"
-
-// export const getParkPosts = () => {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => {
-//       resolve(parkReviews)
-//     }, 500)
-//   })
-// }
