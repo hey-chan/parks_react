@@ -1,5 +1,6 @@
 import React from 'react'
 import { APark } from './APark'
+import { CardDeck } from '../styled-components'
 
 // DEALS WITH RENDERING ALL DATA BY MAPPING OVER IT
 const AllParks = (props) => {
@@ -13,11 +14,11 @@ const AllParks = (props) => {
       ? 
       (<p>Loading</p>) 
       : 
-      (<div>
+      (<CardDeck>
         {/* For each post, we will return APark element */}
         {/* AS we are mapping over an array, each APark will need a key */}
         {parks.sort((a,b)=> b.updated_at - a.updated_at).map(park => (<APark key={park.id} park={park}/>) )}
-      </div>)
+      </CardDeck>)
       }
 
     </>
