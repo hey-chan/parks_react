@@ -34,9 +34,13 @@ const App = () => {
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<AllParks loading={loading} parks={parkPosts}/>} ></Route>
+          <Route
+            path="/"
+            element={<AllParks loading={loading} parks={parkPosts} />}
+          ></Route>
         </Routes>
       </BrowserRouter>
+      <h1 className="text-3xl font-bold underline">Hello world!</h1>
     </>
   );
 };
