@@ -1,10 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Moment from 'react-moment'
+import { useParams } from 'react-router'
+import { useEffect } from 'react/cjs/react.development'
+import { getAPark } from '../services/parkPostServices'
 import { capitalize } from '../utils/stringUtils'
 
 // FOCUSES ON THE RENDERING OF A PARK
 export const APark = (props) => {
-  const {park} = props
+  const [park, setPark] = useState(null)
+  const [loading, setLoading] = useState(true)
+  
+  const {id} = useParams()
+  console.log(useParams())
+  // When first loading up useEffect, we want to call to parkPostServices
+  // When we first boot up, it will load
+  useEffect(()=> {
+    getAPark(id)
+    .then(park => setPark(park))
+    .catch(error => console.log(error))
+    .finally(setLoading(false))
+  }, [])
+
+  // if no parks are available
+  if(!park){
+    return(<p>This park is not on our database</p>)
+  }
+
   return (
     <>
       <h1>{park.park_name} {park.park_icon}</h1>

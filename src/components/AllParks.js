@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardDeck } from '../styled-components' // Uncomment this and change 
+import { CardDeck } from '../styled-components' // Uncomment this and change <CardDeck> to <div> for list like view
 import { ParkDescription } from './ParkDescription'
 
 // DEALS WITH RENDERING ALL DATA BY MAPPING OVER IT
