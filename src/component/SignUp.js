@@ -63,7 +63,7 @@ export default function SignUp() {
           </form>
         </div>
       </section>
-      <h2><Link to="/signin">Already Signed Up? Click here.</Link></h2>
+      <h2><Link to="/auth/signin">Already Signed Up? Click here.</Link></h2>
     </>
   )
 }

@@ -23,13 +23,24 @@ export default function ParkComment() {
   }, [id])
 
 
-  if(!post) {
+  if(!post ) {
     return loading ? (<p>Loading...</p>): (<p>Oops, couldn't find any comments for this park</p>) 
   }
 
+
+  // const averageRating = post.map(rate => rate.rating).reduce((a,b) => a + b) / post.length 
+
   return (
     <>
+      
       <h2 style={{fontWeight: "bold", fontSize: "20px"}}>Comments</h2>
+      {/* {post !== 'undefined' ? 
+        <p>Overall rating: {"⭐️".repeat(averageRating.toFixed(0))} ({averageRating.toFixed(2)})</p> 
+        :
+        <p>No comments are available to show overall rating</p>
+      } */}
+      {/* <p>Overall rating: {"⭐️".repeat(averageRating.toFixed(0))} ({averageRating.toFixed(2)})</p> */}
+      <hr></hr>
       {post.map(comment => (
         <>
           <h4>{comment.user.username} thinks:</h4>

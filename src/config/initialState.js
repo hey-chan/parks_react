@@ -6,7 +6,8 @@ const initialState = {
   categories: [],
   features: [],
   signedInUser: null,
-  jwt: null
+  jwt: null,
+  user: []
 }
 
 export default initialState;

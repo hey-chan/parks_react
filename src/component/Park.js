@@ -6,14 +6,27 @@ import { getParkPost } from '../services/parkPostServices';
 import ParkComment from './ParkComment';
 import ParkMakeComment from './ParkMakeComment';
 import wine from '../data/wine';
+// import { getPosts } from '../servixces/parkPostServices';
+
+ 
 
 
 export default function Park() {
   // const {store} = useGlobalState();
   // const { parkPosts } = store;
+  // const [post, setPost] = useState(null);
   const [park, setPark] = useState(null);
   const [loading, setLoading] = useState(true);
   const {id} = useParams();
+
+  // useEffect(() => {
+  //   getPosts(id)
+  //     .then(post => setPost(post))
+  //     .catch(error => {
+  //       console.log(error.response)
+  //     })
+  //     // .finally(() => setLoading(false))
+  // }, [id])
 
   useEffect(() => {
     // getParkPost(parkPosts, id)
@@ -27,6 +40,9 @@ export default function Park() {
   }, [id])
   // }, [id, parkPosts])
 
+
+  // const averageRating = post.map(rate => rate.rating).reduce((a,b) => a + b) / post.length 
+  
   if(!park) {
     return loading ? (<p>Loading...</p>): (<p>Oops, couldn't find your park.</p>) 
   }
@@ -37,6 +53,7 @@ export default function Park() {
         <li>
           <p></p>
           <h4 style={{fontWeight: "bold", fontSize: "30px"}}>{park.park_icon} {park.name}</h4>
+          {/* <p>Overall rating: {"⭐️".repeat(averageRating.toFixed(0))} ({averageRating.toFixed(2)})</p>  */}
           <p>address: {park.address.number ? park.address.number : null} {park.address.street}, {park.address.suburb}, {park.address.postcode}</p>
           <p>coords: {park.latitude}, {park.longitude}</p>
           <p>category: {park.category.name}</p>

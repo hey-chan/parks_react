@@ -15,7 +15,7 @@ import Dropdown from './component/Dropdown';
 import ParkPosts from './component/ParkPosts';
 import './style.css';
 import initialState from './config/initialState';
-import { retrieveUserFromJWT } from './services/userServices';
+// import { retrieveUserFromJWT } from './services/userServices';
 // import { getFeatures } from './services/featuresServices';
 // import { retrieveUserFromJWT } from './services/userServices';
 
@@ -129,15 +129,15 @@ const App = () => {
   }, [])
 
   // Check user against JWT token for persistent authentication
-  useEffect(() => {
-    retrieveUserFromJWT()
-      .then(response => {
-        dispatch({
-          type: "setSignedInUser",
-          data: response.username
-        })
-      })
-  }, [token])
+  // useEffect(() => {
+  //   retrieveUserFromJWT()
+  //     .then(response => {
+  //       dispatch({
+  //         type: "setSignedInUser",
+  //         data: response.username
+  //       })
+  //     })
+  // }, [token])
 
   return (
     <>
