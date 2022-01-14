@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
+import { useGlobalState } from '../config/store';
+import { createNewPark } from '../services/parkPostServices';
 import { Block, Input, InputButton, Label } from '../styled-components'
 
 
 export const NewPark = (props) => {
   // Initial state; what our form will look like when loading this page
   const navigate = useNavigate();
+  const {store, dispatch} = useGlobalState()
+  const {parkPosts} = store;
+  const [loading, setLoading] = useState(true)
+
   const initialState = {
     park_name: "",
     category: "",
@@ -14,10 +20,22 @@ export const NewPark = (props) => {
     latitude: "",
     longitude: ""
   }
-  const {addNewPark} = props
+  // const {addNewPark} = props
   const [parkFormState, setParkFormState] = useState(initialState);
 
-  
+  function addNewPark(parkObject){
+    createNewPark(parkObject)
+    .then(newPark => {
+      console.log(newPark)
+      dispatch({
+        type: "setParkPosts",
+        data: [...parkPosts, newPark]
+      })
+      navigate("/")
+  })
+  .catch(error => console.log(error))
+}
+
   // When form state changes, we will call this function below, and 
   function handleChange(event){
     setParkFormState({

@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Moment from "react-moment";
 import { useParams } from "react-router";
+import { useGlobalState } from "../config/store";
 import { getAPark } from "../services/parkPostServices";
 import { capitalize } from "../utils/stringUtils";
 import { ParkComment } from "./ParkComment";
 
 // FOCUSES ON THE RENDERING OF A PARK
 export const APark = (props) => {
-  const {parkPosts} = props;
+  const {store} = useGlobalState();
+  const {parkPosts} = store;
   const [park, setPark] = useState(null);
   const [loading, setLoading] = useState(true);
-
   const { id } = useParams(); 
-  console.log(useParams());
+  
+  // console.log(useParams());
   // When first loading up useEffect, we want to call to parkPostServices
   // When we first boot up, it will load
   useEffect(() => {
