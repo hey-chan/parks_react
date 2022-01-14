@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Moment from "react-moment";
 import { useParams } from "react-router";
-import { useEffect } from "react/cjs/react.development";
 import { getAPark } from "../services/parkPostServices";
 import { capitalize } from "../utils/stringUtils";
+import { ParkComment } from "./ParkComment";
 
 // FOCUSES ON THE RENDERING OF A PARK
 export const APark = (props) => {
@@ -18,7 +18,7 @@ export const APark = (props) => {
     getAPark(id)
       .then((park) => setPark(park))
       .catch((error) => console.log(error))
-      .finally(setLoading(false));
+      .finally(() => setLoading(false));
   }, []);
 
   // if no parks are available
@@ -51,6 +51,8 @@ export const APark = (props) => {
         Location: {park.latitude}, {park.longitude}
       </p>
       <hr></hr>
+      <h2>All comments</h2>
+      <ParkComment />
     </div>
   );
 };
