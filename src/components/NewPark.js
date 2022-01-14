@@ -44,20 +44,25 @@ export const NewPark = (props) => {
         </Block>
         <Block>
           <Label>Category</Label>
-          <Input type="text" name="category" placeholder="Select park category" onChange={handleChange} value={parkFormState.category}></Input>
+          <Input type="text" name="category_id" placeholder="Select park category" onChange={handleChange} value={parkFormState.category_id}></Input>
         </Block>
         <Block>
           <Label>Features</Label>
-          <Input type="text" name="features" placeholder="Select park features" onChange={handleChange} value={parkFormState.feature}></Input>
+          <Input type="text" name="feature_id" placeholder="Select park features" onChange={handleChange} value={parkFormState.feature_id}></Input>
         </Block>
         <Block>
           <Label>Address</Label>
-          <Input type="text" name="address" placeholder="Select park address" onChange={handleChange} value={parkFormState.address}></Input>
+          <Input type="text" name="address_id" placeholder="Select park address" onChange={handleChange} value={parkFormState.address_id}></Input>
         </Block>
         <Block>
           <Label>Coordinates</Label>
-          <Input type="text" name="latitude" placeholder="Enter park latitude" onChange={handleChange} value={parkFormState.parseFloat}></Input>
+          <Input type="text" name="latitude" placeholder="Enter park latitude" onChange={handleChange} value={parkFormState.latitude}></Input>
           <Input type="text" name="longitude" placeholder="Enter park longitude" onChange={handleChange} value={parkFormState.longitude}></Input>
+        </Block>
+        <Block>
+          <Label>Cheese and Wine Pair</Label>
+          <Input type="text" name="cheese_pair" placeholder="Add a cheese" onChange={handleChange} value={parkFormState.cheese_pair}></Input>
+          <Input type="text" name="wine_pair" placeholder="Add a wine" onChange={handleChange} value={parkFormState.wine_pair}></Input>
         </Block>
         <Block>
           <InputButton type="submit" value="Add a park"></InputButton>

@@ -7,19 +7,20 @@ import { ParkComment } from "./ParkComment";
 
 // FOCUSES ON THE RENDERING OF A PARK
 export const APark = (props) => {
+  const {parkPosts} = props;
   const [park, setPark] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const { id } = useParams();
+  const { id } = useParams(); 
   console.log(useParams());
   // When first loading up useEffect, we want to call to parkPostServices
   // When we first boot up, it will load
   useEffect(() => {
-    getAPark(id)
+    getAPark(parkPosts, id)
       .then((park) => setPark(park))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false));
-  }, []);
+  }, [id, parkPosts]);
 
   // if no parks are available
   if (!park) {

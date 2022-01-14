@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { GlobalStyle } from "./styled-components/globalStyles";
 import { APark } from "./components/APark";
 import { NewPark } from "./components/NewPark";
+import { NavBar } from "./components/NavBar";
+
 
 const App = () => {
   // THIS useState initial state value is an empty array to begin with
@@ -36,6 +38,7 @@ const App = () => {
     // This sets new park onto the current park0
     .then(newPark => setParkPosts([...parkPosts, newPark]))
     .catch(error => console.log(error))
+    .finally(() => setLoading(false))
   }
 
   return (
@@ -43,12 +46,13 @@ const App = () => {
     <>
       <GlobalStyle />
       <BrowserRouter>
+        <NavBar />
         <Routes>
           {/* Home page goes and redirects to this */}
           <Route path="/" element={<Navigate to="/parks" />} />
           <Route path="/parks" element={<AllParks loading={loading} parks={parkPosts} />}/>
-          <Route path="/parks/:id" element={<APark />} />
           <Route path="/parks/new" element={<NewPark addNewPark={addNewPark} />}/>
+          <Route path="/parks/:id" element={<APark parkPosts={parkPosts}/>} />
         </Routes>
       </BrowserRouter>
       {/* <h1 className="text-3xl font-bold underline">Hello world!</h1> */}

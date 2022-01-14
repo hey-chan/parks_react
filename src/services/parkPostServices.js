@@ -9,17 +9,17 @@ return new Promise((resolve, reject) => {
     setTimeout(() => {
       // After set number of time of 500ms, we will resolve with our parkPosts
       resolve(parks)
-    }, 1000)
+    }, 500)
   })
 }
 
 
 // FOR A SPECIFIC PARK via id
-export const getAPark = (id) => {
+export const getAPark = (parkPosts, id) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve(parks.find(park => park.id === parseInt(id)))  // Where park.id = id of route params
-    }, 1000)
+      resolve(parkPosts.find(park => park.id === parseInt(id)))  // Where park.id = id of route params
+    }, 500)
   })
 }
 
@@ -29,7 +29,7 @@ export const getParkComments = (id) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(parkReviews.find(review => review.park_id === parseInt(id)))
-    }, 1000)
+    }, 500)
   })
 }
 
