@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import AllParks from "./components/AllParks";
 import { createNewPark, getParkPosts } from "./services/parkPostServices";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -6,11 +6,19 @@ import { GlobalStyle } from "./styled-components/globalStyles";
 import { APark } from "./components/APark";
 import { NewPark } from "./components/NewPark";
 import { NavBar } from "./components/NavBar";
+import stateReducer from "./config/stateReducer";
+import initialState from "./config/initialState"
 
 
 const App = () => {
-  // THIS useState initial state value is an empty array to begin with
-  const [parkPosts, setParkPosts] = useState([]);
+  // THIS is store of all state
+  // store: new initialState, which is empty array
+  // useReducer takes stateReducer: which in turn takes state and action
+  // dispatch: checks store as state value
+  const [store, dispatch] = useReducer(stateReducer, initialState)
+
+  // THIS useState initial state value is an empty array to begin with. Not needed now
+  // const [parkPosts, setParkPosts] = useState([]);
 
   // WE will also set up loading state
   // Sometimes can be useful to make loading state restricted to local
@@ -18,13 +26,16 @@ const App = () => {
   // eg. loading a webpage
   const [loading, setLoading] = useState(true);
 
+  const {parkPosts} = store
+
   // WE will also use the useEffect hook
   // When we first open up application, we want to load in our parkPosts
   useEffect(() => {
     getParkPosts()
       .then((parks) => {
         console.log(parks);
-        setParkPosts(parks);
+        // Dispatch all action. parkPosts will be in store, instead of state
+        dispatch({type: "setParkPosts", data: parks});
       })
       // Will catch error
       .catch((error) => console.log(error))
@@ -36,7 +47,7 @@ const App = () => {
   function addNewPark(parkObject){
     createNewPark(parkObject)
     // This sets new park onto the current park0
-    .then(newPark => setParkPosts([...parkPosts, newPark]))
+    .then(newPark => dispatch({type: "setParkPosts", data: [...parkPosts, newPark]}))
     .catch(error => console.log(error))
     .finally(() => setLoading(false))
   }
