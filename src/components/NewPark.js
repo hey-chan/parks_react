@@ -14,9 +14,9 @@ export const NewPark = (props) => {
 
   const initialState = {
     park_name: "",
-    category: "",
-    features: "",
-    address: "",
+    category_id: "",
+    feature_id: "",
+    address_id: "",
     latitude: "",
     longitude: ""
   }
@@ -68,10 +68,10 @@ export const NewPark = (props) => {
           <Label>Features</Label>
           <Input type="text" name="feature_id" placeholder="Select park features" onChange={handleChange} value={parkFormState.feature_id}></Input>
         </Block>
-        <Block>
+        {/* <Block>
           <Label>Address</Label>
           <Input type="text" name="address_id" placeholder="Select park address" onChange={handleChange} value={parkFormState.address_id}></Input>
-        </Block>
+        </Block> */}
         <Block>
           <Label>Coordinates</Label>
           <Input type="text" name="latitude" placeholder="Enter park latitude" onChange={handleChange} value={parkFormState.latitude}></Input>
