@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useEffect } from "react";
+import React, { useReducer, useEffect } from "react";
 import AllParks from "./components/AllParks";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { GlobalStyle } from "./styled-components/globalStyles";
@@ -9,6 +9,8 @@ import stateReducer from "./config/stateReducer";
 import initialState from "./config/initialState"
 import { StateContext } from "./config/store";
 import { getParkPosts } from "./services/parkPostServices";
+// import { getAddresses, getCategories, getFeatures } from "./services/categoriesServices";
+import { Signin } from "./components/Signin";
 
 
 const App = () => {
@@ -34,6 +36,15 @@ const App = () => {
 
   // const [loading, setLoading] = useState(true)
   useEffect(() => {
+    // getCategories()
+    // .then(categories => dispatch({type: "setCategories", data: categories}))
+    // .catch(error => console.log(error))
+    // getFeatures()
+    // .then(features => dispatch({type: "setFeatures", data: features}))
+    // .catch(error => console.log(error))
+    // getAddresses()
+    // .then(addresses => dispatch({type: "setAddresses", data: addresses}))
+    // .catch(error => console.log(error))
     getParkPosts()
     // Dispatch all action. parkPosts will be in store, instead of state
     .then(parks => dispatch({type: "setParkPosts", data:parks}))
@@ -65,6 +76,7 @@ const App = () => {
             <Route path="/parks" element={<AllParks />}/>
             <Route path="/parks/new" element={<NewPark />}/>
             <Route path="/parks/:id" element={<APark />} />
+            <Route path="/auth/signin" element={<Signin />} />
           </Routes>
         </BrowserRouter>
       </StateContext.Provider>
