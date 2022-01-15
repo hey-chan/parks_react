@@ -1,36 +1,8 @@
-// park post data for development
-const category = {
-  1: "all",
-  2: "community",
-  3: "child friendly",
-  4: "dog park",
-  5: "large park",
-  6: "nature",
-  7: "skatepark",
-  8: "sports"
-}
-
-const feature = {
-  1: "all",
-  2: "accessible",
-  3: "basketball",
-  4: "bbq",
-  5: "bins",
-  6: "botanical",
-  7: "cultural",
-  8: "educational",
-  9: "events",
-  10: "exercise",
-  11: "fenced",
-  12: "food nearby",
-  13: "farm"
-}
-
 const parks = [
   {
     id: 1,
-    category_id: category[2],
-    feature_id: feature[8],
+    category_id: "community",
+    feature_id: "educational",
     updated_at: new Date("2000-09-20"),
     address_id: 1,
     park_name: "Royal Park",
@@ -42,8 +14,8 @@ const parks = [
   },
   {
     id: 2,
-    category_id: category[1],
-    feature_id: feature[2],
+    category_id: "all",
+    feature_id: "accessible",
     updated_at: new Date("2021-08-30"),
     address_id: 1,
     park_name: "St Kilda Gardens",
@@ -55,8 +27,8 @@ const parks = [
   },
   {
     id: 3,
-    category_id: category[1],
-    feature_id: feature[3],
+    category_id: "all",
+    feature_id: "accessibile",
     updated_at: new Date("2018-02-10"),
     address_id: 1,
     park_name: "Bundoora Parklands",
@@ -68,8 +40,8 @@ const parks = [
   },
   {
     id: 4	,
-    category_id: category[2],
-    feature_id: feature[3],
+    category_id: "community",
+    feature_id: "child friendly",
     updated_at: new Date("2021-01-30"),
     address_id: 1,
     park_name: "All Nations Park",
@@ -81,8 +53,8 @@ const parks = [
   },
   {
     id: 5	,
-    category_id: category[2],
-    feature_id: feature[2],
+    category_id: "accessible",
+    feature_id: "community",
     updated_at: new Date("2020-12-19"),
     address_id: 1,
     park_name: "Carlton Gardens",
@@ -94,8 +66,8 @@ const parks = [
   },  
   {
     id: 6,
-    category_id: category[2],
-    feature_id: feature[3],
+    category_id: "accessible",
+    feature_id: "child friendly",
     updated_at: new Date("2020-09-20"),
     address_id: 1,
     park_name: "Royal Botanical Gardens",
@@ -107,8 +79,8 @@ const parks = [
   },
   {
     id: 7,
-    category_id: category[3],
-    feature_id: feature[1],
+    category_id: "dog park",
+    feature_id: "all",
     updated_at: new Date("2019-08-30"),
     address_id: 1,
     park_name: "Albert Park Lake",
@@ -120,8 +92,8 @@ const parks = [
   },
   {
     id: 8,
-    category_id: category[3],
-    feature_id: feature[2],
+    category_id: "child friendly",
+    feature_id: "accessible",
     updated_at: new Date("2019-01-30"),
     address_id: 1,
     park_name: "Gasworks Park",
@@ -133,8 +105,8 @@ const parks = [
   },
   {
     id: 9	,
-    category_id: category[3],
-    feature_id: feature[3],
+    category_id: "basketball",
+    feature_id: "child friendly",
     updated_at: new Date("2021-04-27"),
     address_id: 1,
     park_name: "Catani Gardens",

@@ -16,7 +16,8 @@ export const ParkDescription = (props) => {
       <Link to={`/parks/${park.id}`}><h4>{park.park_name}{park.park_icon}</h4></Link>
       <p>address: {park.address_id }</p>
       <p>category: {park.category_id}</p>
-      <p>coordinates: {park.latitude} {park.longitude}</p>
+      <p>feature: {park.feature_id}</p>
+      <p>coordinates: {park.latitude}, {park.longitude}</p>
     </Card>
   )
 };

@@ -2,12 +2,11 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useGlobalState } from '../config/store';
 import { createNewPark } from '../services/parkPostServices';
-import { Block, Input, InputButton, Label, Select, Option} from '../styled-components'
-import categories from '../data/categories';
+import { Block, Input, InputButton, Label, Select, Option } from '../styled-components'
+import categories from '../data/categories'
 import features from '../data/features';
 import addresses from '../data/addresses';
 import { capitalize } from '../utils/stringUtils';
-
 
 
 export const NewPark = (props) => {
@@ -19,9 +18,9 @@ export const NewPark = (props) => {
 
   const initialState = {
     park_name: "",
-    category: "",
-    features: "",
-    address: "",
+    category_id: "",
+    feature_id: "",
+    address_id: "",
     latitude: "",
     longitude: ""
   }
@@ -67,23 +66,24 @@ export const NewPark = (props) => {
         </Block>
         <Block>
           <Label>Category</Label>
-          <Select name="category" onChange={handleChange} defaultValue="" >
-            <Option disabled hidden value="" >Select category</Option>
-            {categories.map(category => (<Option key={category.id} value={category.name}>{capitalize(category.name)}</Option>))}
+
+          <Select name="category_id" onChange={handleChange} defaultValue="">
+            <Option disabled hidden value="">Select a category</Option>
+            {categories.map((cat => (<Option key={cat.id} value={cat.name}>{capitalize(cat.name)}</Option>)))}
           </Select>
         </Block>
         <Block>
           <Label>Features</Label>
-          <Select name="feature" onChange={handleChange} defaultValue="" >
-            <Option disabled hidden value="" >Select feature</Option>
-            {features.map(feature => (<Option key={feature.id} value={feature.name}>{capitalize(feature.name)}</Option>))}
+          <Select name="feature_id" onChange={handleChange} defaultValue="">
+            <Option disabled hidden value="">Select a feature</Option>
+            {features.map((feat => (<Option key={feat.id} value={feat.name}>{capitalize(feat.name)}</Option>)))}
           </Select>
         </Block>
         <Block>
           <Label>Address</Label>
-          <Select name="address" onChange={handleChange} defaultValue="" >
-            <Option disabled hidden value="" >Select address</Option>
-            {addresses.map(address => (<Option key={address.id} value={address.street}>{address.number} {address.street} {address.suburb}</Option>))}
+          <Select name="address_id" onChange={handleChange} defaultValue="">
+            <Option disabled hidden value="">Select a feature</Option>
+            {addresses.map((add => (<Option key={add.id} value={`${add.number} ${add.street}`}>{add.number} {add.street}</Option>)))}
           </Select>
         </Block>
         <Block>
