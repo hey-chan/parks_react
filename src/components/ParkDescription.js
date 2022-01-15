@@ -2,9 +2,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card } from "../styled-components";
-import addresses from "../data/addresses";
-import features from "../data/features";
-import categories from "../data/categories";
+// import addresses from "../data/addresses";
+// import features from "../data/features";
+// import categories from "../data/categories";
 // Will behave to APark.js
 
 export const ParkDescription = (props) => {

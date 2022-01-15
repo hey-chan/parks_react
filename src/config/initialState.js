@@ -1,5 +1,9 @@
 const initialState = {
-  parkPosts: []
+  parkPosts: [],
+  categories: [],
+  features: [],
+  addresses: [],
+  signedInUser: null
 }
 
 export default initialState

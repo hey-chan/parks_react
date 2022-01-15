@@ -3,18 +3,16 @@ import { useNavigate } from 'react-router'
 import { useGlobalState } from '../config/store';
 import { createNewPark } from '../services/parkPostServices';
 import { Block, Input, InputButton, Label, Select, Option } from '../styled-components'
-import categories from '../data/categories'
-import features from '../data/features';
-import addresses from '../data/addresses';
 import { capitalize } from '../utils/stringUtils';
+
 
 
 export const NewPark = (props) => {
   // Initial state; what our form will look like when loading this page
   const navigate = useNavigate();
   const {store, dispatch} = useGlobalState()
-  const {parkPosts} = store;
-  const [loading, setLoading] = useState(true)
+  const {parkPosts, features, categories, addresses} = store;
+  const [loading, setLoading] = useState(false)
 
   const initialState = {
     park_name: "",
@@ -22,12 +20,15 @@ export const NewPark = (props) => {
     feature_id: "",
     address_id: "",
     latitude: "",
-    longitude: ""
+    longitude: "",
+    cheese_pair: "",
+    wine_pair: ""
   }
   // const {addNewPark} = props
   const [parkFormState, setParkFormState] = useState(initialState);
 
   function addNewPark(parkObject){
+    setLoading(true)
     createNewPark(parkObject)
     .then(newPark => {
       console.log(newPark)
@@ -35,6 +36,7 @@ export const NewPark = (props) => {
         type: "setParkPosts",
         data: [...parkPosts, newPark]
       })
+      setLoading(false)
       navigate("/")
   })
   .catch(error => console.log(error))
@@ -57,12 +59,12 @@ export const NewPark = (props) => {
 
 
   return (
-    <div>
+    <>
       <h1>Admin: add a new park</h1>
       <form id="newParkForm" onSubmit={handleSumbit} >
         <Block>
           <Label>Park name</Label>
-          <Input type="text" name="park_name" placeholder="Enter park name" onChange={handleChange} value={parkFormState.park_name}></Input>
+          <Input type="text" name="park_name" placeholder="Enter park name" onChange={handleChange} value={parkFormState.park_name} required></Input>
         </Block>
         <Block>
           <Label>Category</Label>
@@ -97,10 +99,10 @@ export const NewPark = (props) => {
           <Input type="text" name="wine_pair" placeholder="Add a wine" onChange={handleChange} value={parkFormState.wine_pair}></Input>
         </Block>
         <Block>
-          <InputButton type="submit" value="Add a park"></InputButton>
+          <InputButton disabled={loading} type="submit" value="Add a park"></InputButton>
         </Block>
        
       </form>
-    </div>
+    </>
   )
 }

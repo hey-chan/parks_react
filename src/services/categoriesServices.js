@@ -1,6 +1,6 @@
 import categories from "../data/categories";
 import features from "../data/features";
-// import addresses from "../data/addresses";
+import addresses from "../data/addresses";
 
 
 export const getCategories = () => {
@@ -15,8 +15,8 @@ export const getFeatures = () => {
   })
 }
 
-// export const getAddresses = () => {
-//   return new Promise((resolve, reject) => {
-//     resolve(addresses)
-//   })
-// }
+export const getAddresses = () => {
+  return new Promise((resolve, reject) => {
+    resolve(addresses)
+  })
+}

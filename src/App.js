@@ -9,8 +9,9 @@ import stateReducer from "./config/stateReducer";
 import initialState from "./config/initialState"
 import { StateContext } from "./config/store";
 import { getParkPosts } from "./services/parkPostServices";
-// import { getAddresses, getCategories, getFeatures } from "./services/categoriesServices";
+import { getAddresses, getCategories, getFeatures } from "./services/categoriesServices";
 import { Signin } from "./components/Signin";
+import { Signup } from "./components/Signup";
 
 
 const App = () => {
@@ -36,15 +37,15 @@ const App = () => {
 
   // const [loading, setLoading] = useState(true)
   useEffect(() => {
-    // getCategories()
-    // .then(categories => dispatch({type: "setCategories", data: categories}))
-    // .catch(error => console.log(error))
-    // getFeatures()
-    // .then(features => dispatch({type: "setFeatures", data: features}))
-    // .catch(error => console.log(error))
-    // getAddresses()
-    // .then(addresses => dispatch({type: "setAddresses", data: addresses}))
-    // .catch(error => console.log(error))
+    getCategories()
+    .then(categories => dispatch({type: "setCategories", data: categories}))
+    .catch(error => console.log(error))
+    getFeatures()
+    .then(features => dispatch({type: "setFeatures", data: features}))
+    .catch(error => console.log(error))
+    getAddresses()
+    .then(addresses => dispatch({type: "setAddresses", data: addresses}))
+    .catch(error => console.log(error))
     getParkPosts()
     // Dispatch all action. parkPosts will be in store, instead of state
     .then(parks => dispatch({type: "setParkPosts", data:parks}))
@@ -77,6 +78,7 @@ const App = () => {
             <Route path="/parks/new" element={<NewPark />}/>
             <Route path="/parks/:id" element={<APark />} />
             <Route path="/auth/signin" element={<Signin />} />
+            <Route path="/auth/signup" element={<Signup />} />
           </Routes>
         </BrowserRouter>
       </StateContext.Provider>

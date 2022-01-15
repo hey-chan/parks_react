@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useGlobalState } from '../config/store'
-import { getParkPosts } from '../services/parkPostServices'
+// import { getParkPosts } from '../services/parkPostServices'
 import { CardDeck } from '../styled-components' // Uncomment this and change <CardDeck> to <div> for list like view
 import { ParkDescription } from './ParkDescription'
 
 // DEALS WITH RENDERING ALL DATA BY MAPPING OVER IT
 const AllParks = (props) => {
-  const [loading, setLoading] = useState(false)
+  const loading = false
   // We can get our store from useGlobalState that we set up
-  const {store, dispatch} = useGlobalState()
+  const {store} = useGlobalState()
   // From here, we can get our parkPosts
   const {parkPosts} = store
 
