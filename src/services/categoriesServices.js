@@ -1,22 +1,29 @@
-import categories from "../data/categories";
-import features from "../data/features";
-import addresses from "../data/addresses";
+import parkApi from "../config/api";
 
 
-export const getCategories = () => {
-  return new Promise((resolve, reject) => {
-    resolve(categories)
-  })
+export const getCategories = async () => {
+  try {
+    const response = await parkApi.get("/categories")
+    return response.data
+  }catch(err){
+    console.log(err)
+  }
 }
 
-export const getFeatures = () => {
-  return new Promise((resolve, reject) => {
-    resolve(features)
-  })
+export const getFeatures = async () => {
+  try {
+    const response = await parkApi.get("/features")
+    return response.data
+  }catch(err){
+    console.log(err)
+  }
 }
 
-export const getAddresses = () => {
-  return new Promise((resolve, reject) => {
-    resolve(addresses)
-  })
+export const getAddresses = async () => {
+  try {
+    const response = await parkApi.get("/addresses")
+    return response.data
+  }catch(err){
+    console.log(err)
+  }
 }

@@ -18,11 +18,11 @@ export const APark = (props) => {
   // When first loading up useEffect, we want to call to parkPostServices
   // When we first boot up, it will load
   useEffect(() => {
-    getAPark(parkPosts, id)
+    getAPark(id)
       .then((park) => setPark(park))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false));
-  }, [id, parkPosts]);
+  }, [id]);
 
   // if no parks are available
   if (!park) {
@@ -36,11 +36,11 @@ export const APark = (props) => {
   return (
     <div>
       <h1>
-        {park.park_name} {park.park_icon}
+        {park.name} {park.park_icon}
       </h1>
-      <h3>Category: {capitalize(park.category_id)}</h3>
-      <h3>Feature: {park.feature_id}</h3>
-      <p>Address: {park.address_id.number}{park.address_id.street}</p>
+      <h3>Category: {capitalize(park.category.name)}</h3>
+      <h3>Feature: {park.feature.name}</h3>
+      <p>Address: {park.address.number ? park.address.number : null} {park.address.street}, {park.address.suburb}, {park.address.postcode}</p>
       <p>
         Added: <Moment fromNow>{park.updated_at}</Moment>
       </p>
@@ -48,7 +48,7 @@ export const APark = (props) => {
       {/* <p>Updated at: {park.updated_at.toLocaleString()}</p> */}
       <h4>Cheese and wine pair:</h4>
       <p>
-        {park.cheese_pair} and {park.wine_pair}
+        {park.cheese} and {park.wine}
       </p>
       <h4>Park location</h4>
       <p>

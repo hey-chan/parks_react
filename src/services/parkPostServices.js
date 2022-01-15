@@ -1,26 +1,40 @@
 import parks from "../data/parkPosts";
 import parkReviews from "../data/parkReviews";
 
+import parkApi from "../config/api";
 
-// THIS BASICALLY FAKES A FETCH REQUEST
-export const getParkPosts = () => {
-return new Promise((resolve, reject) => {
-    // We will be faking a HTTP request via setTimeout
-    setTimeout(() => {
-      // After set number of time of 500ms, we will resolve with our parkPosts
-      resolve(parks)
-    }, 500)
-  })
+// AXIOS WILL THROW ERROR CODE FOR RESPONSE
+
+// WILL DISPLAY ALL PARKS
+export const getParkPosts = async () => {
+  try{
+    const response = await parkApi.get("/parks")
+    return response.data
+  } catch(err){
+    console.log(err)
+    throw err
+  }
 }
 
 
-// FOR A SPECIFIC PARK via id
-export const getAPark = (parkPosts, id) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(parkPosts.find(park => park.id === parseInt(id)))  // Where park.id = id of route params
-    }, 500)
-  })
+// FOR A SPECIFIC PARK via id. 
+// THIS Saves trip to server by using state, but no useful when it comes to pagination, as
+// export const getAPark = (parkPosts, id) => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve(parkPosts.find(park => park.id === parseInt(id)))  // Where park.id = id of route params
+//     }, 500)
+//   })
+// }
+
+export const getAPark = async (id) => {
+  try{
+    const response = await parkApi.get("/parks/" + id);
+    return response.data
+  } catch(err){
+    console.log(err)
+    throw err
+  }
 }
 
 // FOR COMMENTS THAT CORRESPOND TO A PARK
@@ -34,23 +48,13 @@ export const getParkComments = (id) => {
 }
 
 // FAKING WHAT A DATABASE DOES
-const getNextId = () => {
-  const maxId = Math.max(...parks.map(park => park.id));
-  return maxId + 1
-}
 
-export const createNewPark = (parkObject) => {
-  const newPark = {
-    ...parkObject,
-    category_id: parkObject.category_id || "Misc",
-    feature_id: parkObject.feature_id || "Misc",
-    address_id: parkObject.address_id || "N/A",
-    updated_at: Date.now(),
-    id: getNextId()
+export const createNewPark = async (parkObject) => {
+  try{
+    const response = await parkApi.post("/parks", parkObject);
+    return response.data
+  } catch(err){
+    console.log(err)
+    throw err
   }
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(newPark);
-    }, 500)
-  })
 }

@@ -11,13 +11,15 @@ export const NavBar = (props) => {
   function handleSignout(){
     dispatch({type: "removeSignedInUser"})
   }
-  
+
   return (
     <Nav>
         <span style={{
           fontSize: "1.2em",
           margin: "1em",
-          padding: ".2em .5em"
+          padding: ".2em .5em", 
+          fontWeight: "bold",
+          fontStyle: "italic"
         }}>Hello {signedInUser || "guest"}</span>
         {signedInUser ? 
         <StyledLink onClick={handleSignout}to="/">Sign out</StyledLink>

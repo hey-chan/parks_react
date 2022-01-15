@@ -26,6 +26,8 @@ export const NewPark = (props) => {
   }
   // const {addNewPark} = props
   const [parkFormState, setParkFormState] = useState(initialState);
+  const [file, setFile] = useState(null)
+
 
   function addNewPark(parkObject){
     setLoading(true)
@@ -47,6 +49,14 @@ export const NewPark = (props) => {
     setParkFormState({
       ...parkFormState,
       [event.target.name]: event.target.value
+    })
+  }
+
+  // IMAGE UPLOAD
+  function handleFileChange(event){
+    setFile({
+      ...file,
+      [event.target.files[0]]: event.target.value
     })
   }
   
@@ -71,21 +81,21 @@ export const NewPark = (props) => {
 
           <Select name="category_id" onChange={handleChange} defaultValue="">
             <Option disabled hidden value="">Select a category</Option>
-            {categories.map((cat => (<Option key={cat.id} value={cat.name}>{capitalize(cat.name)}</Option>)))}
+            {categories.map((cat => (<Option key={cat.id} value={cat.id}>{capitalize(cat.name)}</Option>)))}
           </Select>
         </Block>
         <Block>
           <Label>Features</Label>
           <Select name="feature_id" onChange={handleChange} defaultValue="">
             <Option disabled hidden value="">Select a feature</Option>
-            {features.map((feat => (<Option key={feat.id} value={feat.name}>{capitalize(feat.name)}</Option>)))}
+            {features.map((feat => (<Option key={feat.id} value={feat.id}>{capitalize(feat.name)}</Option>)))}
           </Select>
         </Block>
         <Block>
           <Label>Address</Label>
           <Select name="address_id" onChange={handleChange} defaultValue="">
             <Option disabled hidden value="">Select a feature</Option>
-            {addresses.map((add => (<Option key={add.id} value={`${add.number} ${add.street}`}>{add.number} {add.street}</Option>)))}
+            {addresses.map((add => (<Option key={add.id} value={add.id}>{add.number} {add.street}</Option>)))}
           </Select>
         </Block>
         <Block>
@@ -98,6 +108,11 @@ export const NewPark = (props) => {
           <Input type="text" name="cheese_pair" placeholder="Add a cheese" onChange={handleChange} value={parkFormState.cheese_pair}></Input>
           <Input type="text" name="wine_pair" placeholder="Add a wine" onChange={handleChange} value={parkFormState.wine_pair}></Input>
         </Block>
+        <Block>
+          <Label>Add an image</Label>
+          <input type="file" onChange={handleFileChange}/>
+        </Block>
+        <br></br>
         <Block>
           <InputButton disabled={loading} type="submit" value="Add a park"></InputButton>
         </Block>

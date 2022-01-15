@@ -13,10 +13,10 @@ export const ParkDescription = (props) => {
 
   return (
     <Card>
-      <Link to={`/parks/${park.id}`}><h4>{park.park_name}{park.park_icon}</h4></Link>
-      <p>address: {park.address_id }</p>
-      <p>category: {park.category_id}</p>
-      <p>feature: {park.feature_id}</p>
+      <Link to={`/parks/${park.id}`}><h4>{park.name}{park.park_icon}</h4></Link>
+      <p>address: {park.address.number ? park.address.number : null} {park.address.street}, {park.address.suburb}, {park.address.postcode}</p>
+      <p>category: {park.category.name}</p>
+      <p>feature: {park.feature.name}</p>
       <p>coordinates: {park.latitude}, {park.longitude}</p>
     </Card>
   )

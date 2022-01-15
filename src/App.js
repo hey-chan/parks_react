@@ -12,6 +12,7 @@ import { getParkPosts } from "./services/parkPostServices";
 import { getAddresses, getCategories, getFeatures } from "./services/categoriesServices";
 import { Signin } from "./components/Signin";
 import { Signup } from "./components/Signup";
+import About from "./components/About";
 
 
 const App = () => {
@@ -74,6 +75,7 @@ const App = () => {
           <Routes>
             {/* Home page goes and redirects to this */}
             <Route path="/" element={<Navigate to="/parks" />} />
+            <Route path="/about" element={<About />}/>
             <Route path="/parks" element={<AllParks />}/>
             <Route path="/parks/new" element={<NewPark />}/>
             <Route path="/parks/:id" element={<APark />} />
