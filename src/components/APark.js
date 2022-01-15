@@ -40,6 +40,7 @@ export const APark = (props) => {
       </h1>
       <h3>Category: {capitalize(park.category_id)}</h3>
       <h3>Feature: {park.feature_id}</h3>
+      <p>Address: {park.address_id.number}{park.address_id.street}</p>
       <p>
         Added: <Moment fromNow>{park.updated_at}</Moment>
       </p>

@@ -42,6 +42,9 @@ const getNextId = () => {
 export const createNewPark = (parkObject) => {
   const newPark = {
     ...parkObject,
+    category_id: parkObject.category_id || "Misc",
+    feature_id: parkObject.feature_id || "Misc",
+    address_id: parkObject.address_id || "N/A",
     updated_at: Date.now(),
     id: getNextId()
   }

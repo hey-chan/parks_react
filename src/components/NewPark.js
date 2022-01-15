@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useGlobalState } from '../config/store';
 import { createNewPark } from '../services/parkPostServices';
-import { Block, Input, InputButton, Label } from '../styled-components'
+import { Block, Input, InputButton, Label, Select, Option } from '../styled-components'
+import categories from '../data/categories'
+import features from '../data/features';
+import addresses from '../data/addresses';
+import { capitalize } from '../utils/stringUtils';
 
 
 export const NewPark = (props) => {
@@ -62,16 +66,26 @@ export const NewPark = (props) => {
         </Block>
         <Block>
           <Label>Category</Label>
-          <Input type="text" name="category_id" placeholder="Select park category" onChange={handleChange} value={parkFormState.category_id}></Input>
+
+          <Select name="category_id" onChange={handleChange} defaultValue="">
+            <Option disabled hidden value="">Select a category</Option>
+            {categories.map((cat => (<Option key={cat.id} value={cat.name}>{capitalize(cat.name)}</Option>)))}
+          </Select>
         </Block>
         <Block>
           <Label>Features</Label>
-          <Input type="text" name="feature_id" placeholder="Select park features" onChange={handleChange} value={parkFormState.feature_id}></Input>
+          <Select name="feature_id" onChange={handleChange} defaultValue="">
+            <Option disabled hidden value="">Select a feature</Option>
+            {features.map((feat => (<Option key={feat.id} value={feat.name}>{capitalize(feat.name)}</Option>)))}
+          </Select>
         </Block>
-        {/* <Block>
+        <Block>
           <Label>Address</Label>
-          <Input type="text" name="address_id" placeholder="Select park address" onChange={handleChange} value={parkFormState.address_id}></Input>
-        </Block> */}
+          <Select name="address_id" onChange={handleChange} defaultValue="">
+            <Option disabled hidden value="">Select a feature</Option>
+            {addresses.map((add => (<Option key={add.id} value={`${add.number} ${add.street}`}>{add.number} {add.street}</Option>)))}
+          </Select>
+        </Block>
         <Block>
           <Label>Coordinates</Label>
           <Input type="text" name="latitude" placeholder="Enter park latitude" onChange={handleChange} value={parkFormState.latitude}></Input>
