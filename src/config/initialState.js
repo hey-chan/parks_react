@@ -3,7 +3,8 @@ const initialState = {
   categories: [],
   features: [],
   addresses: [],
-  signedInUser: null
+  signedInUser: null,
+  jwt: null
 }
 
 export default initialState

@@ -41,12 +41,15 @@ const App = () => {
     getCategories()
     .then(categories => dispatch({type: "setCategories", data: categories}))
     .catch(error => console.log(error))
+
     getFeatures()
     .then(features => dispatch({type: "setFeatures", data: features}))
     .catch(error => console.log(error))
+
     getAddresses()
     .then(addresses => dispatch({type: "setAddresses", data: addresses}))
     .catch(error => console.log(error))
+    
     getParkPosts()
     // Dispatch all action. parkPosts will be in store, instead of state
     .then(parks => dispatch({type: "setParkPosts", data:parks}))

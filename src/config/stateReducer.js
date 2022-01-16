@@ -46,6 +46,23 @@ const stateReducer = (state, action) => {
       }
     }
 
+    case "setJWT": {
+      // sessionStorage only persists on browser session
+      sessionStorage.setItem('jwt', action.data)
+      return{
+        ...state,
+        jwt: action.data
+      }
+    }
+
+    case "removeJWT": {
+      sessionStorage.removeItem('jwt')
+      return{
+        ...state,
+        jwt: null
+      }
+    }
+
     
     default: 
       return state;

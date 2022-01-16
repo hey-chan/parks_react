@@ -51,10 +51,10 @@ export const getParkComments = (id) => {
 
 export const createNewPark = async (parkObject) => {
   try{
-    const response = await parkApi.post("/parks", parkObject);
+    const response = await parkApi.post("/parks/new", parkObject);
     return response.data
   } catch(err){
-    console.log(err)
+    // console.log("Created new post" + err)
     throw err
   }
 }

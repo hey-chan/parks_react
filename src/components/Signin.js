@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { parseError } from '../config/api'
 import { useGlobalState } from '../config/store'
 import { signInUser } from '../services/userServices'
 import { Block, InputButton, Label, Input } from '../styled-components'
 
 export const Signin = (props) => {
-  const initialValues=  {email: "", password: ""}
+  const initialValues=  {signin: "", password: ""}
   const [formValues, setFormValues] = useState(initialValues)
+  const [errorMessage, setErrorMessage] = useState("")
   const {dispatch} = useGlobalState()
   const navigate = useNavigate()
 
@@ -22,20 +24,26 @@ export const Signin = (props) => {
   function handleSubmit(event){
     event.preventDefault()
     signInUser(formValues)
-    .then(email => {
-      dispatch({type: "setSignedInUser", data: email})
+    .then(response => {
+      console.log(response)
+      dispatch({type: "setSignedInUser", data: response.username})
+      dispatch({type: "setJWT", data: response.jwt})
       navigate("/")
     })
-    .catch(error => console.log(error))
+    .catch(error => {
+      const message = parseError(error)
+      setErrorMessage(message)
+    })
   }
 
 
   return (
     <>
       <form onSubmit={handleSubmit}>
+        {errorMessage && <p style={{color: "red"}}>{errorMessage}</p>}
         <Block>
-          <Label>Email</Label>
-          <Input onChange={handleChange} type="email" name="email" placeholder="Enter email" value={formValues.email} />
+          <Label>Login</Label>
+          <Input onChange={handleChange} type="text" name="signin" placeholder="Enter email" value={formValues.signin} />
         </Block>
         <Block>
           <Label>Password</Label>
