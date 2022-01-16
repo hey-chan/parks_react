@@ -11,7 +11,7 @@ export const logInUser = async (logInDetails) => {
 
 export const retrieveUserFromJWT = async () => {
   const jwt = sessionStorage.getItem("jwt");
-  const response = await picnicAPI.post("/auth/logged_in_user", { jwt });
+  const response = await picnicAPI.post("/auth/signed_in_user", { jwt });
   return response.data;
 };
 
