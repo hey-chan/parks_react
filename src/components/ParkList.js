@@ -12,7 +12,7 @@ export const ParkList = (props) => {
       <Link to={`/parks/${post.id}`}>
         <h3>{post.name}</h3>
       </Link>
-      <p>address: {post.address.number ? post.address.number : null} {post.address.street}, {post.address.suburb}, {post.address.postcode}</p>
+      <p>Address: {post.address.number ? post.address.number : null} {post.address.street}, {post.address.suburb}, {post.address.postcode}</p>
       <h4>Category: {capitialize(post.category.name)}</h4>
       <h4>Feature: {capitialize(post.feature.name)}</h4>
       

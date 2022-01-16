@@ -26,7 +26,9 @@ export const NewPark = (props) => {
     feature_id: "",
     address_id: "",
     latitude: "",
-    longitude: ""
+    longitude: "",
+    cheese_pair: "",
+    wine_pair: ""
     
   };
 

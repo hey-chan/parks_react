@@ -10,9 +10,9 @@ import intialState from './config/initialState';
 import { StateContext } from './config/store';
 import { getParks } from './services/parkPostServices';
 import { getAddresses, getCategories, getFeatures } from './services/categoriesServices';
-import { SignIn } from './components/SignIn';
+import { SignIn } from './components/Signin';
 import { retrieveUserFromJWT } from './services/userServices';
-import { Register } from './components/SignUp';
+import { Register } from './components/Signup';
 
 
 

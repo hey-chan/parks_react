@@ -28,6 +28,11 @@ export const BlogPost = (props) => {
       <h3>Category:{capitialize(park.category.name)}</h3>
       <h3>Category:{capitialize(park.feature.name)}</h3>
       <p>Coordinates: {park.latitude} {park.longitude}</p>
+      <h4>Cheese and wine pair:</h4>
+      <p>
+        {park.cheese} and {park.wine}
+      </p>
+      
     </>
   );
 };
