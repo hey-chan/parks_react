@@ -1,7 +1,7 @@
 import React from "react";
 import { useGlobalState } from "../config/store";
 import { CardDeck } from "../styled-components";
-import { ParkList } from "./ParkList";
+import { ParkList } from "./ListPreview";
 
 const ParkPosts = (props) => {
   const loading = false;

@@ -5,14 +5,14 @@ import { BlogPost } from './components/Park';
 import ParkPosts from './components/ParkPosts';
 import { NewPark } from './components/NewPark';
 import { NavBar } from './components/NavBar';
-import stateReducer from './config/stateReducer';
+import stateReducer from './config/reducer';
 import intialState from './config/initialState';
 import { StateContext } from './config/store';
 import { getParks } from './services/parkPostServices';
 import { getAddresses, getCategories, getFeatures } from './services/categoriesServices';
-import { SignIn } from './components/Signin';
+import { SignIn } from './components/SignIn';
 import { retrieveUserFromJWT } from './services/userServices';
-import { Register } from './components/Signup';
+import { Register } from './components/SignUp';
 
 
 

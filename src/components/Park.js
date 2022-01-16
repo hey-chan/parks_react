@@ -3,6 +3,7 @@ import Moment from "react-moment";
 import { useParams } from "react-router";
 import { getBlogPost } from "../services/parkPostServices";
 import { capitialize } from "../utils/stringUtils";
+import { ParkComments } from "./ParkComments";
 
 export const BlogPost = (props) => {
   const [park, setPark] = useState(null);
@@ -32,6 +33,10 @@ export const BlogPost = (props) => {
       <p>
         {park.cheese} and {park.wine}
       </p>
+      <hr></hr>
+      <div>
+        <ParkComments />
+      </div>
       
     </>
   );
