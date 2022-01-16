@@ -1,47 +1,35 @@
-import React, { useReducer, useEffect } from "react";
-import AllParks from "./components/AllParks";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { GlobalStyle } from "./styled-components/globalStyles";
-import { APark } from "./components/APark";
-import { NewPark } from "./components/NewPark";
-import { NavBar } from "./components/NavBar";
-import stateReducer from "./config/stateReducer";
-import initialState from "./config/initialState"
-import { StateContext } from "./config/store";
-import { getParkPosts } from "./services/parkPostServices";
-import { getAddresses, getCategories, getFeatures } from "./services/categoriesServices";
-import { Signin } from "./components/Signin";
-import { Signup } from "./components/Signup";
-import About from "./components/About";
+import React, {useEffect, useReducer} from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { GlobalStyle } from './styled-components/globalStyles';
+import { BlogPost } from './components/Park';
+import ParkPosts from './components/ParkPosts';
+import { NewPark } from './components/NewPark';
+import { NavBar } from './components/NavBar';
+import stateReducer from './config/stateReducer';
+import intialState from './config/initialState';
+import { StateContext } from './config/store';
+import { getParks } from './services/parkPostServices';
+import { getAddresses, getCategories, getFeatures } from './services/categoriesServices';
+import { SignIn } from './components/SignIn';
+import { retrieveUserFromJWT } from './services/userServices';
+import { Register } from './components/SignUp';
+
+
 
 
 const App = () => {
-  const [store, dispatch] = useReducer(stateReducer, initialState)
-  // THIS is store of all state
-  // store: new initialState, which is empty array
-  // useReducer takes stateReducer: which in turn takes state and action
-  // dispatch: checks store as state value
+  
+  const [store, dispatch] = useReducer(stateReducer, intialState);
+  const token = sessionStorage.getItem('jwt');
 
-  // THIS useState initial state value is an empty array to begin with. Not needed now
-  // const [parkPosts, setParkPosts] = useState([]);
+  const {signedInUser} = store
 
-  // WE will also set up loading state. Not needed
-  // Sometimes can be useful to make loading state restricted to local
-  // This is initialise to true; this true is needed to load info
-  // eg. loading a webpage
-  // const [loading, setLoading] = useState(true);
-
-  // const {parkPosts} = store
-
-  // // WE will also use the useEffect hook
-  // // When we first open up application, we want to load in our parkPosts
-
-  // const [loading, setLoading] = useState(true)
+  
   useEffect(() => {
     getCategories()
-    .then(categories => dispatch({type: "setCategories", data: categories}))
-    .catch(error => console.log(error))
-
+      .then(categories => dispatch({type: "setCategories", data: categories}))
+      .catch(error => console.log(error))
+    
     getFeatures()
     .then(features => dispatch({type: "setFeatures", data: features}))
     .catch(error => console.log(error))
@@ -49,47 +37,39 @@ const App = () => {
     getAddresses()
     .then(addresses => dispatch({type: "setAddresses", data: addresses}))
     .catch(error => console.log(error))
-    
-    getParkPosts()
-    // Dispatch all action. parkPosts will be in store, instead of state
-    .then(parks => dispatch({type: "setParkPosts", data:parks}))
-    // Will catch error
-    .catch(error => console.log(error))
-      // .finally(() => setLoading(false));
-    // Empty dependendcy array. only needs to run once
-  }, []);
+      
+    getParks()
+      .then(parks => dispatch({type: "setParkPosts", data: parks}) )
+      .catch(error => console.log(error))
+    }, [])
 
-  // // 
-  // function addNewPark(parkObject){
-  //   createNewPark(parkObject)
-  //   // This sets new park onto the current park0
-  //   .then(newPark => dispatch({type: "setParkPosts", data: [...parkPosts, newPark]}))
-  //   .catch(error => console.log(error))
-  //   .finally(() => setLoading(false))
-  // }
+
+
+    useEffect(() => {
+        retrieveUserFromJWT()
+          .then(response => dispatch({type:"setSignedInUser", data: response.username}))
+    }, [token])
 
   return (
-    //Can only use ternary operator when using it inside JSX. Styling varies between devs
     <>
-      <GlobalStyle />
-      <StateContext.Provider value={{store, dispatch}}>
-        <BrowserRouter>
-          <NavBar />
-          <Routes>
-            {/* Home page goes and redirects to this */}
-            <Route path="/" element={<Navigate to="/parks" />} />
-            <Route path="/about" element={<About />}/>
-            <Route path="/parks" element={<AllParks />}/>
-            <Route path="/parks/new" element={<NewPark />}/>
-            <Route path="/parks/:id" element={<APark />} />
-            <Route path="/auth/signin" element={<Signin />} />
-            <Route path="/auth/signup" element={<Signup />} />
-          </Routes>
-        </BrowserRouter>
-      </StateContext.Provider>
-      {/* <h1 className="text-3xl font-bold underline">Hello world!</h1> */}
+    <GlobalStyle />
+    <StateContext.Provider value={{store, dispatch}}>
+    <BrowserRouter>
+      <NavBar/>
+      <Routes>
+          <Route path="/" element={<Navigate to="/parks" />} />
+          <Route path="/parks" element={<ParkPosts  />} />
+          {signedInUser === "admin" && <Route path="/parks/new" element={<NewPark  />} />}
+          <Route path="/parks/:id" element={<BlogPost/>} />
+          <Route path="/auth/signin" element={<SignIn />} />
+          {!signedInUser &&  <Route path="/auth/signup" element={<Register />} />}
+      
+      </Routes>
+    
+    </BrowserRouter>
+    </StateContext.Provider>
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App

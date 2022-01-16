@@ -4,45 +4,42 @@ import { useGlobalState } from "../config/store";
 import { createNewPark } from "../services/parkPostServices";
 import {
   Block,
+  Label,
   Input,
   InputButton,
-  Label,
   Select,
   Option,
-} from "../styled-components";
-import { capitalize } from "../utils/stringUtils";
+} from "../styled-components/index";
+import { capitialize } from "../utils/stringUtils";
 import { parseError } from "../config/api";
 
 export const NewPark = (props) => {
-  // Initial state; what our form will look like when loading this page
   const navigate = useNavigate();
   const { store, dispatch } = useGlobalState();
-  const { parkPosts, features, categories, addresses } = store;
+  const { parkPosts, categories, features, addresses } = store;
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("");
 
   const initialState = {
-    park_name: "",
+    name: "",
     category_id: "",
     feature_id: "",
     address_id: "",
     latitude: "",
-    longitude: "",
-    cheese_pair: "",
-    wine_pair: "",
+    longitude: ""
+    
   };
-  // const {addNewPark} = props
-  const [parkFormState, setParkFormState] = useState(initialState);
-  // const [file, setFile] = useState(null)
 
-  function addNewPark(parkObject) {
+  const [formState, setFormState] = useState(initialState);
+
+  function addNewPark(postObject) {
     setLoading(true);
-    createNewPark(parkObject)
-      .then((newPark) => {
-        console.log(newPark);
+    createNewPark(postObject)
+      .then((newPost) => {
+        console.log(newPost);
         dispatch({
-          type: "setParkPosts",
-          data: [...parkPosts, newPark],
+          type: "setParkPosts", 
+          data: [...parkPosts, newPost],
         });
         setLoading(false);
         navigate("/");
@@ -53,84 +50,71 @@ export const NewPark = (props) => {
       });
   }
 
-  // When form state changes, we will call this function below, and
   function handleChange(event) {
-    setParkFormState({
-      ...parkFormState,
+    setFormState({
+      ...formState,
       [event.target.name]: event.target.value,
     });
   }
 
-  // IMAGE UPLOAD
-  // function handleFileChange(event){
-  //   setFile({
-  //     ...file,
-  //     [event.target.files[0]]: event.target.value
-  //   })
-  // }
-  // const [errorMessage, setErrorMessage] = useState("");
   function handleSubmit(event) {
     event.preventDefault();
-    addNewPark(parkFormState);
-    // This navigates back home
-    navigate("/");
+    addNewPark(formState);
   }
 
   return (
-    <>
+    <div>
       <h1>Admin: add a new park</h1>
       <form id="newParkForm" onSubmit={handleSubmit}>
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         <Block>
-          <Label>Park name</Label>
+          <Label>Title</Label>
           <Input
             type="text"
-            name="park_name"
-            placeholder="Enter park name"
+            name="name"
+            placeholder="Enter Title.."
+            value={formState.name}
             onChange={handleChange}
-            value={parkFormState.park_name}
-            // required
-          ></Input>
+          />
         </Block>
         <Block>
-          <Label>Category</Label>
-
-          <Select name="category_id" onChange={handleChange} defaultValue="">
+          <Label>Select park category</Label>
+          <Select name="category_id" defaultValue="" onChange={handleChange}>
             <Option disabled hidden value="">
-              Select a category
+              Select Category:
             </Option>
-            {categories.map((cat) => (
-              <Option key={cat.id} value={cat.id}>
-                {capitalize(cat.name)}
+            {categories.map((category) => (
+              <Option key={category.id} value={category.id}>
+                {capitialize(category.name)}
               </Option>
             ))}
           </Select>
         </Block>
         <Block>
-          <Label>Features</Label>
-          <Select name="feature_id" onChange={handleChange} defaultValue="">
+          <Label>Select park feature</Label>
+          <Select name="feature_id" defaultValue="" onChange={handleChange}>
             <Option disabled hidden value="">
-              Select a feature
+              Select Category:
             </Option>
-            {features.map((feat) => (
-              <Option key={feat.id} value={feat.id}>
-                {capitalize(feat.name)}
+            {features.map((feature) => (
+              <Option key={feature.id} value={feature.id}>
+                {capitialize(feature.name)}
               </Option>
             ))}
           </Select>
-        </Block>
-        <Block>
-          <Label>Address</Label>
-          <Select name="address_id" onChange={handleChange} defaultValue="">
-            <Option disabled hidden value="">
-              Select a feature
-            </Option>
-            {addresses.map((add) => (
-              <Option key={add.id} value={add.id}>
-                {add.number} {add.street}
+          <Block>
+            <Label>Select park address</Label>
+            <Select name="address_id" defaultValue="" onChange={handleChange}>
+              <Option disabled hidden value="">
+                Select address:
               </Option>
-            ))}
-          </Select>
+              {addresses.map((add) => (
+                <Option key={add.id} value={add.id}>
+                  {add.number} {add.street}
+                </Option>
+              ))}
+            </Select>
+          </Block>
         </Block>
         <Block>
           <Label>Coordinates</Label>
@@ -139,46 +123,32 @@ export const NewPark = (props) => {
             name="latitude"
             placeholder="Enter park latitude"
             onChange={handleChange}
-            value={parkFormState.latitude}
+            value={formState.latitude}
           ></Input>
           <Input
             type="number"
             name="longitude"
             placeholder="Enter park longitude"
             onChange={handleChange}
-            value={parkFormState.longitude}
-          ></Input>
-        </Block>
-        <Block>
-          <Label>Cheese and Wine Pair</Label>
-          <Input
-            type="text"
-            name="cheese_pair"
-            placeholder="Add a cheese"
-            onChange={handleChange}
-            value={parkFormState.cheese_pair}
-          ></Input>
-          <Input
-            type="text"
-            name="wine_pair"
-            placeholder="Add a wine"
-            onChange={handleChange}
-            value={parkFormState.wine_pair}
+            value={formState.longitude}
           ></Input>
         </Block>
         {/* <Block>
-          <Label>Add an image</Label>
-          <input type="file" onChange={handleFileChange}/>
+          <Label>Content</Label>
+          <TextArea
+            from="newParkForm"
+            type="text"
+            name="content"
+            placeholder="Enter Text"
+            value={formState.content}
+            onChange={handleChange}
+          ></TextArea>
         </Block> */}
         <br></br>
         <Block>
-          <InputButton
-            disabled={loading}
-            type="submit"
-            value="Add a park"
-          ></InputButton>
+          <InputButton disabled={loading} type="submit" value="Add Post" />
         </Block>
       </form>
-    </>
+    </div>
   );
 };

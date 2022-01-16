@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Nav Bar */
+
+.nav-bar {
+  font-family: 'Rubik',
+  sans-serif;
+  @apply flex justify-between items-center h-16 bg-[#32502E] text-white pr-8 tracking-widest leading-7 drop-shadow-2xl;
+}
+
+.nav-links {
+  @apply hover:bg-[#53884c];
+}
+
+.picnic-vic {
+  font-family: 'Rubik',
+  sans-serif;
+  @apply text-2xl font-bold italic drop-shadow-lg ;
+}
+
+.dropdown {
+  font-family: 'Rubik',
+  sans-serif;
+  @apply grid grid-rows-4 text-center items-center bg-[#53884c] pb-5;
+}
+
+.drop-links {
+  @apply hover:bg-white;
+}
+
+/* Footer */
+
+.footer {
+  font-family: 'Rubik',
+  sans-serif;
+  @apply flex justify-center items-center h-16 bg-[#32502E] text-white tracking-widest;
+}
+
+.github-img {
+  @apply h-10 pr-3;
+}
+
+/* About */
+
+section h2 {  
+  font-family: 'Rubik',
+  sans-serif;
+  @apply text-2xl font-bold p-8 tracking-widest;
+}
+
+.about-container {
+  font-family: 'Rubik',
+  sans-serif;
+  @apply flex pl-8 tracking-widest leading-7;
+}
+
+.park-img {
+  @apply w-1/2;
+}
+
+.about-park {
+  @apply px-8 w-1/2;
+}
+
+.partners-container {
+  font-family: 'Rubik',
+  sans-serif;
+  @apply flex pl-8 tracking-widest leading-7;
+}
+
+.cheese-wine-img {
+  @apply w-1/2 h-1/2;
+}
+
+.about-partners {
+  @apply px-8 pb-14 w-1/2;
+}
+
+/* Sign In/Sign Up */
+
+.sign-container {
+  font-family: 'Rubik',
+  sans-serif;
+  @apply flex pl-8 pb-14 tracking-widest leading-loose;
+}
+
+.sign-in-form {
+  @apply px-14 w-1/2;
+}
+
+label {
+  @apply font-bold;
+}
+
+.buttons {
+  @apply flex space-x-4 pt-14;
+}
+
+button {
+  @apply bg-green-800 hover:bg-green-600 text-white font-bold py-2 px-4 border border-zinc-800 rounded;
+}

@@ -1,10 +1,9 @@
-const initialState = {
-  parkPosts: [],
-  categories: [],
-  features: [],
-  addresses: [],
-  signedInUser: null,
-  jwt: null
+const intialState = {
+    parkPosts: [],
+    categories: [],
+    signedInUser: null,
+    jwt: null,
+    users: []
 }
 
-export default initialState
+export default intialState;

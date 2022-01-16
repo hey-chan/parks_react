@@ -4,7 +4,6 @@ import App from './App';
 
 test('renders basic empty template', () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/Loading parks/i);
+  const linkElement = getByText(/basic empty template/i);
   expect(linkElement).toBeInTheDocument();
 });
-
