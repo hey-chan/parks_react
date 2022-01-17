@@ -31,7 +31,7 @@ export default function NavBar({toggle}) {
         }
         {signedInUser === "admin" &&  <NavLink className="nav-links p-4" to="/parks/new">Create new park</NavLink>  }
         {!signedInUser && <NavLink to="/auth/signup">Sign up</NavLink> }
-        <span>| Hello, {signedInUser || "guest"}</span>
+        <span> | Hello, {signedInUser || "guest"}</span>
       </div>
       
     </nav>

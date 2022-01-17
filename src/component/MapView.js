@@ -17,7 +17,7 @@ const libraries = ['places'];
 // Sets Google Maps API within a container
 const containerStyle = {
   width: '100vw',
-  height: '82.9vh'
+  height: '85vh'
 };
 
 // Centers Google Maps API to Melbourne coordinates

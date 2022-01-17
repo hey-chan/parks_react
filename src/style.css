@@ -50,6 +50,12 @@ section h2 {
   @apply text-2xl font-bold p-8 tracking-widest;
 }
 
+div h1 {
+  font-family: 'Rubik',
+  sans-serif;
+  @apply text-2xl font-bold p-8 tracking-widest;
+}
+
 .about-container {
   font-family: 'Rubik',
   sans-serif;
@@ -80,24 +86,23 @@ section h2 {
 
 /* Sign In/Sign Up */
 
-.sign-container {
+.log-container {
   font-family: 'Rubik',
   sans-serif;
-  @apply flex pl-8 pb-14 tracking-widest leading-loose;
+  @apply flex pl-8 pb-32 tracking-widest leading-loose;
 }
 
-.sign-in-form {
+.log-form {
   @apply px-14 w-1/2;
 }
 
 label {
+  width: 300px;
   @apply font-bold;
 }
 
-.buttons {
-  @apply flex space-x-4 pt-14;
-}
+/* New Park */
 
-button {
-  @apply bg-green-800 hover:bg-green-600 text-white font-bold py-2 px-4 border border-zinc-800 rounded;
+.newParkForm {
+  @apply px-14 w-1/2;
 }
