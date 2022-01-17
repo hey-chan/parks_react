@@ -56,7 +56,7 @@ export const getPosts = async (park_id) => {
     return response.data;
   } catch (err) {
     console.log("Get Posts " + err)
-    throw err
+    
   }
 }
 
@@ -105,13 +105,24 @@ export const getPost = async (id) => {
   //   })
   // }
 
-// CREATE/POST COMMENT
+// CREATE/POST A PARK
 export const createNewPark = async (parkPostObject) => {
   try {
     const response = await picnicAPI.post('/parks/new', parkPostObject)
     return response.data;
   } catch (err) {
     console.log("Create New Park Post " + err)
+    throw err
+  }
+}
+
+// PARK ADDRESS
+export const createParkAddress = async (id) => {
+  try {
+    const response = await picnicAPI.post('/parks/' + id + '/address' )
+    console.log(response);
+    return response.data
+  } catch(err){
     throw err
   }
 }
@@ -127,9 +138,9 @@ export const updateAPark = async(parkObject) => {
   }
 }
 
-export const deleteAPark = async(parkObject) => {
+export const deleteAPark = async(id) => {
   try {
-    const response = await picnicAPI.delete('/parks/:id', parkObject)
+    const response = await picnicAPI.delete('/parks/' + id + '/address')
     return response.data;
   } catch (err) {
     console.log("Deleted park:  " + err)
