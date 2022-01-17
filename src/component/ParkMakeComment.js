@@ -1,37 +1,44 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router';
 import { useGlobalState } from '../config/store';
-import { createNewPark } from '../services/parkPostServices';
+import { createAComment } from '../services/parkPostServices';
+import {
+  Block,
+  Label,
+  Input,
+  InputButton,
+} from "../styled-components/index";
 import { parseError } from '../config/api';
 
-export default function ParkMakeComment() {
-  
+
+export const ParkMakeComment = (props) => {
+  const navigate = useNavigate();
   const {store, dispatch} = useGlobalState();
-  // const {posts, features} = store;
   const {posts} = store;
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
+  const {signedInUser} = store;
 
   const initialState = {
-    park_comment: "",
-    park_image: "",
-    // feature: []
+    comment: "",
+    user_id: signedInUser,
+    rating: ""
+
   }
   
   const [postFormState, setPostFormState] = useState(initialState);
 
-  function addNewParkPost(parkPostObject) {
+  function addNewComment(parkComment) {
     setLoading(true)
-    createNewPark(parkPostObject)
-      .then(newParkPost => {
-        console.log(newParkPost);
+    createAComment(parkComment)
+      .then(newComment => {
+        console.log(newComment);
         dispatch({
-          type: "setParkPosts",
-          data: [...posts, newParkPost]
+          type: "setPosts",
+          data: [...posts, newComment]
         })
         setLoading(false)
-        navigate("/")
+        navigate("/parks/:id")
       })
       .catch(error => {
         const message = parseError(error);
@@ -49,49 +56,37 @@ export default function ParkMakeComment() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    addNewParkPost(postFormState);
+    addNewComment(postFormState);
   }
 
   return (
     <>
       <form id="addParkPost" onSubmit={handleSubmit}>
-          {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
-          <label>Add Park Comment: <br />
-            <textarea
-              id="park_comment"
-              from="addParkPost"
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+          <Block>
+            <Label>Add a comment</Label>
+            <Input
               type="text"
-              name="park_comment"
-              placeholder="Enter park comment"
-              value={postFormState.park_comment}
+              name="comment"
+              placeholder="Enter Title.."
               onChange={handleChange}
-            ></textarea>
-          </label>
-        <br />
-          {/* <label>Select what feature this comment applies to:
-            <select name="feature_id" onChange={handleChange}>
-              {features
-                .map(feature => (
-                  <option key={feature.id} value={feature.name}>
-                    {feature.name}
-                  </option>
-                ))}
-            </select>
-          </label>
-        <br /> */}
-          <label>Upload images: <br />
-            <input 
-              id="park_image"
-              type="file" 
-              from="addParkPost"
-              name="park_image" 
-              placeholder="Click to upload file"
-              value={postFormState.park_image}
-              onChange={handleChange}
+              value={postFormState.comment}
             />
-          </label>
-        <br />
-          <button disabled={loading} type="submit" className="primary">Add Park Comment</button>
+          </Block>
+          <Block>
+            <Label>Rating</Label>
+            <Input
+              type="number"
+              name="rating"
+              placeholder="Rating"
+              onChange={handleChange}
+              value={postFormState.rating}
+            ></Input>
+          </Block>
+          <br></br>
+          <Block>
+            <InputButton disabled={loading} type="submit" value="Add a comment" />
+          </Block>
       </form>
     </>
   )

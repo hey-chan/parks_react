@@ -2,13 +2,10 @@ import React, {useEffect, useState} from 'react';
 // import React, {useEffect} from 'react';
 import { useParams } from 'react-router';
 import Moment from 'react-moment';
-// import {useGlobalState} from '../utils/stateContext'
 import { getPosts } from '../services/parkPostServices';
 
 export default function ParkComment() {
-  // const { store } = useGlobalState();
-  // const { store, dispatch } = useGlobalState();
-  // const { posts, loading } = store;
+  
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const {id} = useParams();
@@ -30,7 +27,7 @@ export default function ParkComment() {
   return (
     <>
       <h2 style={{fontWeight: "bold", fontSize: "20px"}}>Comments</h2>
-      {post.map(comment => (
+      {post.map((comment) => (
         <>
           <h4>{comment.user.username} thinks:</h4>
           <p>{comment.comment}</p>

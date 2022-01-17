@@ -2,14 +2,15 @@ import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { getAPark } from '../services/parkPostServices';
-// import { useGlobalState } from '../utils/stateContext';
+import { useGlobalState } from '../config/store';
 import ParkComment from './ParkComment';
-import ParkMakeComment from './ParkMakeComment';
+import {ParkMakeComment} from './ParkMakeComment';
 import wine from '../data/wine';
 
 
 export const ParkPost = (props) => {
-  // const {store} = useGlobalState();
+  const {store} = useGlobalState();
+  const {signedInUser} = store
   // const { parkPosts } = store;
   const [park, setPark] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -58,7 +59,9 @@ export const ParkPost = (props) => {
         </li>
         <hr />
         <li>
-          <ParkMakeComment />
+          <br></br>
+        {signedInUser ?  (<ParkMakeComment />) : (<p>Log in to make a comment</p>)}
+          
         </li>
         <br />
         <li>

@@ -7,8 +7,8 @@ import {Block, Label, Input, InputButton} from '../styled-components/index'
 
 export const Register = (props) => {
   const navigate = useNavigate()
-  const {store, dispatch} = useGlobalState();
-  const {users} = store
+  const { dispatch} = useGlobalState();
+
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
