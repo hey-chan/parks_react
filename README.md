@@ -3,7 +3,8 @@
 
 > _Nothing is better than a picnic in Vic!_
 
-[Deployed Picnic Victoria App](https://picnic-vic.netlify.app/) | [PicnicVic Repo](https://github.com/PicnicVic) | [PicnicVic Repo](https://github.com/PicnicVic/parks_react) | [Parks Rails_API Repo](https://github.com/PicnicVic/Rails_API)
+[Deployed Picnic Victoria App](https://picnic-vic.netlify.app/) | Nb. It may take up to a minute for backend data to load, as this has been deployed separately from the front end data
+[PicnicVic Repo](https://github.com/PicnicVic) | [PicnicVic Repo](https://github.com/PicnicVic/parks_react) | [Parks Rails_API Repo](https://github.com/PicnicVic/Rails_API)
 
 **ASSESSMENT:** Full Stack Application - Part B - for Coder Academy
 
